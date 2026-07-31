@@ -4,6 +4,7 @@ function Leaderboard() {
   return (
     <ResourceView
       resource="leaderboard"
+      codespaceEndpoint="-8000.app.github.dev/api/leaderboard"
       title="Leaderboard"
       description="Current standings across teams and athletes."
       columns={3}

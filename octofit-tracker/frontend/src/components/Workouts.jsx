@@ -4,6 +4,7 @@ function Workouts() {
   return (
     <ResourceView
       resource="workouts"
+      codespaceEndpoint="-8000.app.github.dev/api/workouts"
       title="Workouts"
       description="Suggested training sessions matched to common fitness goals."
       columns={2}

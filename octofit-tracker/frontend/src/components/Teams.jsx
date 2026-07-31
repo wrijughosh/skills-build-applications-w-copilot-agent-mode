@@ -4,6 +4,7 @@ function Teams() {
   return (
     <ResourceView
       resource="teams"
+      codespaceEndpoint="-8000.app.github.dev/api/teams"
       title="Teams"
       description="Team rosters, home cities, and OctoFit mascots."
       columns={2}

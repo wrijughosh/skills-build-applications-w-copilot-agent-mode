@@ -4,6 +4,7 @@ function Activities() {
   return (
     <ResourceView
       resource="activities"
+      codespaceEndpoint="-8000.app.github.dev/api/activities"
       title="Activities"
       description="Completed workouts with duration, calories, distance, and team context."
       columns={2}

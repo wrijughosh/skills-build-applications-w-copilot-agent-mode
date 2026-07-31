@@ -4,6 +4,7 @@ function Users() {
   return (
     <ResourceView
       resource="users"
+      codespaceEndpoint="-8000.app.github.dev/api/users"
       title="Users"
       description="Athletes, goals, and account details tracked by the OctoFit API."
       columns={2}
