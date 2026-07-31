@@ -1,43 +1,34 @@
-import { useEffect, useState } from 'react';
-
-const codespaceName = import.meta.env.VITE_CODESPACE_NAME;
-const API_URL = codespaceName
-  ? `https://${codespaceName}-8000.app.github.dev/api/workouts`
-  : 'http://localhost:8000/api/workouts';
+import ResourceView from './ResourceView.jsx'
 
 function Workouts() {
-  const [workouts, setWorkouts] = useState([]);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    fetch(API_URL)
-      .then((res) => res.json())
-      .then((data) => setWorkouts(Array.isArray(data) ? data : data.results ?? []))
-      .catch((err) => setError(err.message));
-  }, []);
-
   return (
-    <div className="container mt-4">
-      <h2>Workouts</h2>
-      {error && <div className="alert alert-danger">{error}</div>}
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {workouts.map((workout, i) => (
-            <tr key={workout._id ?? i}>
-              <td>{workout.name}</td>
-              <td>{workout.description}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
+    <ResourceView
+      resource="workouts"
+      title="Workouts"
+      description="Suggested training sessions matched to common fitness goals."
+      columns={2}
+      renderCard={(workout) => (
+        <>
+          <h2>{workout.title}</h2>
+          <p>{workout.description}</p>
+          <dl>
+            <div>
+              <dt>Difficulty</dt>
+              <dd>{workout.difficulty}</dd>
+            </div>
+            <div>
+              <dt>Duration</dt>
+              <dd>{workout.durationMinutes} min</dd>
+            </div>
+            <div>
+              <dt>Focus</dt>
+              <dd>{workout.focusArea}</dd>
+            </div>
+          </dl>
+        </>
+      )}
+    />
+  )
 }
 
-export default Workouts;
+export default Workouts
