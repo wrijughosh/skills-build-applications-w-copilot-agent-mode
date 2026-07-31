@@ -1,43 +1,35 @@
-import { useEffect, useState } from 'react';
-
-const codespaceName = import.meta.env.VITE_CODESPACE_NAME;
-const API_URL = codespaceName
-  ? `https://${codespaceName}-8000.app.github.dev/api/users`
-  : 'http://localhost:8000/api/users';
+import ResourceView from './ResourceView.jsx'
 
 function Users() {
-  const [users, setUsers] = useState([]);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    fetch(API_URL)
-      .then((res) => res.json())
-      .then((data) => setUsers(Array.isArray(data) ? data : data.results ?? []))
-      .catch((err) => setError(err.message));
-  }, []);
-
   return (
-    <div className="container mt-4">
-      <h2>Users</h2>
-      {error && <div className="alert alert-danger">{error}</div>}
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>Username</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user, i) => (
-            <tr key={user._id ?? i}>
-              <td>{user.username}</td>
-              <td>{user.email}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
+    <ResourceView
+      resource="users"
+      codespaceEndpoint="-8000.app.github.dev/api/users"
+      title="Users"
+      description="Athletes, goals, and account details tracked by the OctoFit API."
+      columns={2}
+      renderCard={(user) => (
+        <>
+          <h2>{user.firstName} {user.lastName}</h2>
+          <p className="muted">@{user.username}</p>
+          <dl>
+            <div>
+              <dt>Email</dt>
+              <dd>{user.email}</dd>
+            </div>
+            <div>
+              <dt>Goal</dt>
+              <dd>{user.fitnessGoal}</dd>
+            </div>
+            <div>
+              <dt>Age</dt>
+              <dd>{user.age}</dd>
+            </div>
+          </dl>
+        </>
+      )}
+    />
+  )
 }
 
-export default Users;
+export default Users
