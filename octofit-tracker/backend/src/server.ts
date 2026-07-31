@@ -21,6 +21,18 @@ app.get('/api/activities', (_req, res) => {
   res.json([]);
 });
 
+app.get('/api/teams', (_req, res) => {
+  res.json([]);
+});
+
+app.get('/api/leaderboard', (_req, res) => {
+  res.json([]);
+});
+
+app.get('/api/workouts', (_req, res) => {
+  res.json([]);
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on ${baseUrl}`);
 });
